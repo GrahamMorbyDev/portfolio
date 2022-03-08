@@ -28,26 +28,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('about') }}">About</a>
                     </li>
+                    {% if isIndex %}
                     <li class="nav-item">
                         <a class="nav-link" href="#skills">Skills</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#skills">Skills</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Projects
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#project1">Project 1</a></li>
-                            <li><a class="dropdown-item" href="#project2">Project 2</a></li>
-                            <li><a class="dropdown-item" href="#project3">Project 3</a></li>
-                            <li><a class="dropdown-item" href="#project4">Project 4</a></li>
+                            {% for project in projects %}
+                                <li><a class="dropdown-item" href="{{url_for('project', id=project.id)}}">{{project.title}}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
+                    {% if isIndex %}
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
+                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add Project</a>
+                        <a class="nav-link" href="/#contact">Contact</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('add_project')}}">Add Project</a>
                     </li>
                 </ul>
             </div>
@@ -65,20 +76,14 @@
     <div class="socials">
         <!--Delete any you don't use-->
         <!--Icons from FontAwesome.com/icons-->
-        <a href="">
+        <a href="https://twitter.com/GrahammorbyDev">
             <i class="fab fa-twitter"></i>
         </a>
-        <a href="">
+        <a href="https://github.com/GrahamMorbyDev">
             <i class="fab fa-github"></i>
         </a>
-        <a href="">
+        <a href="https://www.linkedin.com/in/%F0%9F%92%BB-graham-morby-19634a91/">
             <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="">
-            <i class="fab fa-tiktok"></i>
         </a>
     </div>
     <div class="treehouse">

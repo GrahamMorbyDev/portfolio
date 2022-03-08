@@ -5,21 +5,23 @@ from models import db, app, Project
 @app.route('/')
 def index():
     projects = Project.query.all()
-    return render_template('index.html', projects=projects)
+    return render_template('index.html', projects=projects, isIndex=True)
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    projects = Project.query.all()
+    return render_template('about.html', projects=projects)
 
 
 @app.route('/project/<id>')
 def project(id):
+    projects = Project.query.all()
     single_project = Project.query.get_or_404(id)
-    return render_template('detail.html', project=single_project)
+    return render_template('detail.html', project=single_project, projects=projects)
 
 
-@app.route('/add/project', methods=['GET', 'POST'])
+@app.route('/project/add', methods=['GET', 'POST'])
 def add_project():
     if request.form:
         new_project = Project(
@@ -35,7 +37,22 @@ def add_project():
     return render_template('projectform.html')
 
 
-@app.route('/delete/project/<id>')
+@app.route('/project/edit/<id>', methods=['GET', 'POST'])
+def edit_project(id):
+    projects = Project.query.all()
+    project = Project.query.get_or_404(id)
+    if request.form:
+        project.title = request.form['title']
+        project.description = request.form['desc']
+        project.link = request.form['github']
+        project.skills = request.form['skills']
+        project.completed = request.form['date']
+        db.session.commit()
+        return redirect('index')
+    return render_template('editproject.html', project=project, projects=projects)
+
+
+@app.route('/project/delete/<id>')
 def delete_project(id):
     single_project = Project.query.get_or_404(id)
     db.session.delete(single_project)
