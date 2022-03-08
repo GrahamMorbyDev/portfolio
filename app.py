@@ -1,5 +1,5 @@
 from flask import render_template, url_for
-from models import db, app
+from models import db, app, Project
 
 
 @app.route('/')
@@ -23,6 +23,7 @@ def add_project():
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True, port=8000, host='127.0.0.1')
 
 
