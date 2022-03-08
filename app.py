@@ -37,7 +37,7 @@ def add_project():
     return render_template('projectform.html')
 
 
-@app.route('/project/edit/<id>', methods=['GET', 'POST'])
+@app.route('/project/<id>/edit', methods=['GET', 'POST'])
 def edit_project(id):
     projects = Project.query.all()
     project = Project.query.get_or_404(id)
@@ -52,7 +52,7 @@ def edit_project(id):
     return render_template('editproject.html', project=project, projects=projects)
 
 
-@app.route('/project/delete/<id>')
+@app.route('/project/<id>/delete')
 def delete_project(id):
     single_project = Project.query.get_or_404(id)
     db.session.delete(single_project)
