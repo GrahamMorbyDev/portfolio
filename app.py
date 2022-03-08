@@ -1,6 +1,5 @@
-from flask import Flask, render_template, url_for
-
-app = Flask(__name__)
+from flask import render_template, url_for
+from models import db, app
 
 
 @app.route('/')
