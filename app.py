@@ -1,5 +1,6 @@
 from flask import (render_template, url_for, request, redirect)
 from models import db, app, Project
+import datetime
 
 
 @app.route('/')
@@ -29,7 +30,7 @@ def add_project():
             description=request.form['desc'],
             link=request.form['github'],
             skills=request.form['skills'],
-            completed=request.form['date']
+            completed=datetime.datetime.strptime(request.form['date'], '%Y-%m')
         )
         db.session.add(new_project)
         db.session.commit()
@@ -46,9 +47,9 @@ def edit_project(id):
         project.description = request.form['desc']
         project.link = request.form['github']
         project.skills = request.form['skills']
-        project.completed = request.form['date']
+        project.completed = datetime.datetime.strptime(request.form['date'], '%Y-%m')
         db.session.commit()
-        return redirect('index')
+        return redirect(url_for('index'))
     return render_template('editproject.html', project=project, projects=projects)
 
 

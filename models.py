@@ -14,7 +14,7 @@ class Project(db.Model):
     title = db.Column('Title', db.String)
     description = db.Column('Description', db.TEXT)
     link = db.Column('Link', db.String)
-    completed = db.Column('Completed', db.String)
+    completed = db.Column('Completed', db.DATETIME)
     skills = db.Column('Skills', db.String)
 
     def __repr__(self):
