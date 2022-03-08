@@ -9,10 +9,14 @@ back-end
 To run this site locally follow these steps
 
 - Clone the project from github
-- in terminal run `python -m venv env`
-- then run `source /env/Scripts/activate`
-- install the required packages using `pip install`
-- then in your terminal run `python app.py`
+- Create a virtual environment
+  - Mac: `python3 -m venv env`
+  - Windows: `python -m venv env`
+- Activate your environment
+  - Mac: `source ./env/bin/activate`
+  - Windows: `.\env\Scripts\activate`
+- Install the required packages using `pip install`
+- Then in your terminal run `python app.py`
 
 This has been a labour of love for me to learn python, I have wanted to learn it for many years, and now I feel like I have a real grasp on the syntax, Flask, SQLAlchemy and other
 wonderful things you can do! 
