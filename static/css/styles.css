@@ -551,6 +551,13 @@ EXCEEDS - About Page
     padding-right: 10px;
 }
 
+#not-found {
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 10px;
+    margin-bottom: 40px;
+}
+
 /*******
 Media Queries
 *******/

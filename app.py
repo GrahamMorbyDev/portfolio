@@ -15,7 +15,7 @@ def about():
 
 @app.route('/project/<id>')
 def project(id):
-    single_project = Project.query.get(id)
+    single_project = Project.query.get_or_404(id)
     return render_template('detail.html', project=single_project)
 
 
@@ -33,6 +33,19 @@ def add_project():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('projectform.html')
+
+
+@app.route('/delete/project/<id>')
+def delete_project(id):
+    single_project = Project.query.get_or_404(id)
+    db.session.delete(single_project)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', msg=error), 404
 
 
 if __name__ == '__main__':

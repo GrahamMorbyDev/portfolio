@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}404{% endblock %}
+
+{% block content %}
+<section>
+    <section id="not-found">
+           <img src="https://media0.giphy.com/media/14uQ3cOFteDaU/giphy.gif?cid=ecf05e47fzs97xg0xkkav9a6s10i6xwghn3c2n0e63ff6ihr&rid=giphy.gif&ct=g" alt="404 world">
+           <h3>Hmm...it seems this page can't be found.</h3>
+           <p>{{ msg }}</p>
+           <a href="{{ url_for('index') }}">
+               <button><i class="fas fa-home"></i>Go Home</button>
+           </a>
+    </section>
+</section>
+{% endblock %}
