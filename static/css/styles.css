@@ -362,15 +362,35 @@ Articles
     grid-gap: 5rem;
     grid-template-columns: 20% 20% 20% 20%;
     text-align: center;
-    padding: 5%;
+    position: relative;
+    padding: 3rem 10%;
+    text-align: center;
 }
 .a-article {
+    width: 100%;
     text-align: center;
     border: 1px solid #cccccc;
     border-radius: 20px;
     padding: 20px 10px;
 }
 
+.article {
+    margin: 0 auto;
+    text-align: center;
+}
+.article-image {
+    position: relative;
+    padding: 3rem 30%;
+    text-align: center;
+}
+.article-body {
+    position: relative;
+    padding: 3rem 10%;
+    text-align: center;
+}
+.article-description {
+    text-align: left;
+}
 /********************
 Description - Detail
 ********************/
@@ -670,6 +690,11 @@ Media Queries
     }
 }
 @media (max-width: 1024px) {
+    .article-image {
+        position: relative;
+        padding: 3rem 20%;
+        text-align: center;
+    }
     .articles {
         display: grid;
         grid-gap: 5rem;
@@ -686,6 +711,11 @@ Media Queries
 }
 
 @media (max-width: 600px) {
+    .article-image {
+        position: relative;
+        padding: 3rem 10%;
+        text-align: center;
+    }
     .articles {
         display: grid;
         grid-gap: 5rem;

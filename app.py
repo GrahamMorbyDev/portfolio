@@ -74,6 +74,13 @@ def articles():
     return render_template('articles.html', articles=articles, projects=projects)
 
 
+@app.route('/article/<id>')
+def article(id):
+    article = requests.get('https://dev.to/api/articles/' + id)
+    article = article.json()
+    return render_template('article.html', article=article)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

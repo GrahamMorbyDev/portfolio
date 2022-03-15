@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block title %}Articles{% endblock %}
-
+{% block description %} A list of my articles for you to read {% endblock %}
+{% block keywords %} articles, python, tutorials. python developer {% endblock %}
 {% block header %}
 <section class="header">
     <h1>Articles</h1>
@@ -20,7 +21,7 @@
             <p>
                 Published: {{article.readable_publish_date}}
             </p>
-            <a href="{{article.url}}" class="github-btn" target="_blank">
+            <a href="{{url_for('article', id=article.id)}}" class="github-btn">
                 View
             </a>
         </div>

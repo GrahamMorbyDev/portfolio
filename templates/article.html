@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}{{article.title}}{% endblock %}
+{% block description %} {{article.description}} {% endblock %}
+{% block keywords %} {{article.tag_list}} {% endblock %}
+
+{% block header %}
+<section class="header">
+    <h1>{{article.title}}</h1>
+    <p>{{article.tag_list}}</p>
+    <p>{{article.readable_publish_date}}.</p>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="article">
+    <div class="article-image">
+        <img src="{{article.cover_image}}" alt="{{article.title}}" width="100%">
+    </div>
+    <hr>
+    <div class='article-body'>
+        <div class="article-description">
+            {{article.body_html | safe }}
+        </div>
+    </div>
+</section>
+{% endblock %}

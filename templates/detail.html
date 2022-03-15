@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 {% block title %}Project{% endblock %}
+{% block description %} {{project.description}} {% endblock %}
+{% block keywords %} {{project.skills}} {% endblock %}
 {% block header %}
 <section class="header">
     <h1>{{project.title}}</h1>
