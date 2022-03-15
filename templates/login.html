@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block title %}Login{% endblock %}
+
+{% block header %}
+<section class="header">
+    <h1>Login</h1>
+</section>
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" id="form">
+    {{ form.hidden_tag() }}
+        {{ form.username.label(class='form-label') }}
+        {{ form.username(size=32, class='form-control') }}<br>
+        {{ form.password.label(class='form-label') }}
+        {{ form.password(size=32, class='form-control') }}
+    <p>{{ form.remember_me() }}</p>
+    <p>{{ form.submit(class='btn btn-primary') }}</p>
+    {% for error in form.username.errors %}
+    <div class="alert alert-danger">
+        <strong>Error username!</strong> {{ error }}
+    </div>
+    {% endfor %}
+    {% for error in form.password.errors %}
+    <div class="alert alert-danger">
+        <strong>Error password!</strong> {{ error }}
+    </div>
+    {% endfor %}
+</form>
+{% endblock %}

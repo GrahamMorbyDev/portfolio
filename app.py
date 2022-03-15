@@ -1,6 +1,11 @@
-from flask import (render_template, url_for, request, redirect)
-from models import db, app, Project
+from flask import (render_template, url_for, request, redirect, flash, jsonify)
+from flask_login import login_user, logout_user, current_user, login_required 
+from models import db, app, Project, User
+from werkzeug.urls import url_parse
+from forms import LoginForm
+import requests
 import datetime
+
 
 
 @app.route('/')
@@ -58,6 +63,46 @@ def delete_project(id):
     single_project = Project.query.get_or_404(id)
     db.session.delete(single_project)
     db.session.commit()
+    return redirect(url_for('index'))
+
+
+@app.route('/articles')
+def articles():
+    articles = requests.get('https://dev.to/api/articles?username=grahammorby')
+    articles = articles.json()
+    return render_template('articles.html', articles=articles)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password', 'alert-danger')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
+        
+
+@app.route('/register', methods=['POST'])
+def register():
+    user = User(username=request.form['username'], email=request.form['email'])
+    user.set_password(request.form['password'])
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(message='User successfully added'), 200
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
     return redirect(url_for('index'))
 
 

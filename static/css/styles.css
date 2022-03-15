@@ -354,6 +354,24 @@ Footer
 }
 
 /********************
+Articles
+********************/
+
+.articles {
+    display: grid;
+    grid-gap: 5rem;
+    grid-template-columns: 20% 20% 20% 20%;
+    text-align: center;
+    padding: 5%;
+}
+.a-article {
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    padding: 20px 10px;
+}
+
+/********************
 Description - Detail
 ********************/
 
@@ -477,7 +495,7 @@ Form
 }
 
 #form div {
-    text-align: center;
+    text-align: left;
 }
 
 #form button {
@@ -649,6 +667,37 @@ Media Queries
     #form textarea  {
         width: 450px;
         padding-left: 30px;
+    }
+}
+@media (max-width: 1024px) {
+    .articles {
+        display: grid;
+        grid-gap: 5rem;
+        grid-template-columns: 40% 40%;
+        text-align: center;
+        padding: 5%;
+    }
+    .a-article {
+        text-align: center;
+        border: 1px solid #cccccc;
+        border-radius: 20px;
+        padding: 20px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .articles {
+        display: grid;
+        grid-gap: 5rem;
+        grid-template-columns: 100%;
+        text-align: center;
+        padding: 5%;
+    }
+    .a-article {
+        text-align: center;
+        border: 1px solid #cccccc;
+        border-radius: 20px;
+        padding: 20px 10px;
     }
 }
 
