@@ -68,9 +68,10 @@ def delete_project(id):
 
 @app.route('/articles')
 def articles():
+    projects = Project.query.all()
     articles = requests.get('https://dev.to/api/articles?username=grahammorby')
     articles = articles.json()
-    return render_template('articles.html', articles=articles)
+    return render_template('articles.html', articles=articles, projects=projects)
 
 
 @app.route('/login', methods=['GET', 'POST'])
