@@ -1,4 +1,4 @@
-from flask import (render_template, url_for, request, redirect, flash, jsonify)
+from flask import (render_template, send_file, url_for, request, redirect, flash, jsonify)
 from flask_login import login_user, logout_user, current_user, login_required 
 from models import db, app, Project, User
 from werkzeug.urls import url_parse
@@ -29,6 +29,7 @@ def project(id):
 
 @app.route('/project/add', methods=['GET', 'POST'])
 def add_project():
+    projects = Project.query.all()
     if request.form:
         new_project = Project(
             title=request.form['title'],
@@ -40,7 +41,7 @@ def add_project():
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('projectform.html')
+    return render_template('projectform.html', projects=projects)
 
 
 @app.route('/project/<id>/edit', methods=['GET', 'POST'])
@@ -76,9 +77,10 @@ def articles():
 
 @app.route('/article/<id>')
 def article(id):
+    projects = Project.query.all()
     article = requests.get('https://dev.to/api/articles/' + id)
     article = article.json()
-    return render_template('article.html', article=article)
+    return render_template('article.html', article=article, projects=projects)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -112,6 +114,12 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/download')
+def download_resume():
+    path = 'grahammorbyresume.pdf'
+    return send_file(path, as_attachment=True)
 
 
 @app.errorhandler(404)
